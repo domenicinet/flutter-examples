@@ -1,10 +1,36 @@
 <html>
     <head>
-        
+        <head>
+            <style>
+                body {
+                    background-color:#0e161f;
+                    color:white;
+                }
+                a {
+                    color:white;
+                    text-decoration: none;
+                }
+                a:hover {
+                    text-decoration: underline;
+                }
+                .dartpad-frame-container {
+                    position:relative;
+                    width:100%;
+                    height:100%;
+                    margin:0 auto;
+                }
+                .dartpad-frame {
+                    position:absolute;
+                    width:100%;
+                    height:100%;
+                    border-style:none;
+                }
+            </style>
+        </head>
     </head>
-    <body style="background-color:#0e161f;">
-        <div style="position:relative;width:99%;height:99%;margin:0 auto">
-            <iframe src="https://dartpad.dev/embed-flutter.html?gh_owner=domenicinet&gh_repo=flutter-examples&gh_path=lib/example-1&theme=dark&run=true&split=50" style="position:absolute;top:0;left:0;width:100%;height:100%;border-style:none;"></iframe>
+    <body>
+        <div class="dartpad-frame-container">
+            <iframe class="dartpad-frame" src="https://dartpad.dev/embed-flutter.html?gh_owner=domenicinet&gh_repo=flutter-examples&gh_path=lib/example-1&theme=dark&run=true&split=50"></iframe>
         </div>
     </body>
 </html>

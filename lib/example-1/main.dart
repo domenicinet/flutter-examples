@@ -5,12 +5,15 @@ class ExampleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Example 1'),
+        title: const Text('Flutter Example 1'),
       ),
-      body: Center(
-        child: Column(
+      body: Center(        
+        child: Column(          
           children: [
-            Text('This is Flutter example #1'),
+            Container(
+              padding: const EdgeInsets.all(20),
+              child: const Text('This is Flutter example #1'),
+            ),
           ],
         ),
       ),
