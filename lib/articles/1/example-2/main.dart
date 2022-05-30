@@ -31,8 +31,8 @@ class _MyWidgetState extends State<MyWidget>
   final double address2Top = 110;
   bool swapped = false;
 
-  Animation<double> addressAnimation;
-  AnimationController controller;
+  late AnimationController controller;
+  late Animation<double> addressAnimation;
   animationListener() => setState(() { }); 
 
   @override
@@ -67,7 +67,7 @@ class _MyWidgetState extends State<MyWidget>
 
   @override
   Widget build(BuildContext context) {
-    var tweenValue = addressAnimation?.value ?? 0.0;
+    var tweenValue = addressAnimation.value;
 
     return Container(
       width: 300,
@@ -79,26 +79,29 @@ class _MyWidgetState extends State<MyWidget>
           Positioned(
             top: address1Top + tweenValue,
             left: 20,
-            child: Text("This is the first address"),
+            child: const Text("This is the first address"),
           ),
           // Bottom address
           Positioned(
             top: address2Top - tweenValue,
             left: 20,
-            child: Text("This is another address"),
+            child: const Text("This is another address"),
           ),
           // Swap button
           Positioned(
             top: 50,
             right: 20,
-            child: FlatButton(
+            child: TextButton(
               onPressed: () => setState(() {
                 swapped ? 
                   controller.reverse() : controller.forward();
 
                 swapped = !swapped;
               }),
-              child: Text("swap"),
+              child: const Text(
+                "swap", 
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],

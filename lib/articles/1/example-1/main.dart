@@ -41,23 +41,26 @@ class _MyWidgetState extends State<MyWidget> {
           Positioned(
             top: swapped ? address2Top : address1Top,
             left: 20,
-            child: Text("This is the first address"),
+            child: const Text("This is the first address"),
           ),
           // Bottom address
           Positioned(
             top: swapped ? address1Top : address2Top,
             left: 20,
-            child: Text("This is another address"),
+            child: const Text("This is another address"),
           ),
           // Swap button
           Positioned(
             top: 50,
             right: 20,
-            child: FlatButton(
+            child: TextButton(
               onPressed: () => setState(() {
                 swapped = !swapped;
               }),
-              child: Text("swap"),
+              child: const Text(
+                "swap",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ),
         ],
