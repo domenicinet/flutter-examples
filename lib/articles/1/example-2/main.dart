@@ -24,13 +24,51 @@ class MyWidget extends StatefulWidget {
   createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MyWidgetState extends State<MyWidget> 
+  with TickerProviderStateMixin {
+
   final double address1Top = 20;
   final double address2Top = 110;
   bool swapped = false;
 
+  Animation<double> addressAnimation;
+  AnimationController controller;
+  animationListener() => setState(() { }); 
+
+  @override
+  void didChangeDependencies() async {
+    super.didChangeDependencies();
+
+    // Initialize animations
+    controller = AnimationController(
+      duration: const Duration(milliseconds: 300), 
+      vsync: this,
+    );
+
+    addressAnimation = Tween(
+      begin: 0.0, 
+      end: address2Top - address1Top,
+    )
+    .animate(
+      CurvedAnimation(
+        parent: controller, 
+        curve: const Interval(0.0, 1.0, curve: Curves.easeInOut),
+      )
+    )
+    ..addListener(animationListener);
+  }
+
+  @override
+  dispose() {
+    // Dispose of animation controller
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var tweenValue = addressAnimation?.value ?? 0.0;
+
     return Container(
       width: 300,
       height: 150,
@@ -39,13 +77,13 @@ class _MyWidgetState extends State<MyWidget> {
         children: <Widget> [
           // Top address
           Positioned(
-            top: swapped ? address2Top : address1Top,
+            top: address1Top + tweenValue,
             left: 20,
             child: Text("This is the first address"),
           ),
           // Bottom address
           Positioned(
-            top: swapped ? address1Top : address2Top,
+            top: address2Top - tweenValue,
             left: 20,
             child: Text("This is another address"),
           ),
@@ -55,6 +93,9 @@ class _MyWidgetState extends State<MyWidget> {
             right: 20,
             child: FlatButton(
               onPressed: () => setState(() {
+                swapped ? 
+                  controller.reverse() : controller.forward();
+
                 swapped = !swapped;
               }),
               child: Text("swap"),
