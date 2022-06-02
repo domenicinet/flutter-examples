@@ -8,46 +8,45 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: MyWidget(),
+          child: SwapWidget(),
         ),
       ),
     );
   }
 }
 
-class MyWidget extends StatefulWidget {
+class SwapWidget extends StatefulWidget {
   @override
-  createState() => _MyWidgetState();
+  createState() => _SwapWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
-  final double address1Top = 20;
-  final double address2Top = 110;
+class _SwapWidgetState extends State<SwapWidget> {
+  final double widgetATop = 20;
+  final double widgetBTop = 110;
   bool swapped = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: 300,
       height: 150,
-      color: Colors.blue,
+//       color: Colors.blue,
       child: Stack(
         children: <Widget> [
-          // Top address
+          // Widget A
           Positioned(
-            top: swapped ? address2Top : address1Top,
+            top: swapped ? widgetBTop : widgetATop,
             left: 20,
-            child: const Text("This is the first address"),
+            child: const Text("This is the widget A"),
           ),
-          // Bottom address
+          // Widget B
           Positioned(
-            top: swapped ? address1Top : address2Top,
+            top: swapped ? widgetATop : widgetBTop,
             left: 20,
-            child: const Text("This is another address"),
+            child: const Text("This is widget B"),
           ),
           // Swap button
           Positioned(
@@ -57,10 +56,7 @@ class _MyWidgetState extends State<MyWidget> {
               onPressed: () => setState(() {
                 swapped = !swapped;
               }),
-              child: const Text(
-                "swap",
-                style: TextStyle(color: Colors.white),
-              ),
+              child: const Text("swap"),
             ),
           ),
         ],

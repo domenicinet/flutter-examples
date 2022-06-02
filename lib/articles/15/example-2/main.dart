@@ -8,27 +8,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Center(
-          child: MyWidget(),
+          child: AnimatedSwapWidget(),
         ),
       ),
     );
   }
 }
 
-class MyWidget extends StatefulWidget {
+class AnimatedSwapWidget extends StatefulWidget {
   @override
-  createState() => _MyWidgetState();
+  createState() => _AnimatedSwapWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> 
+class _AnimatedSwapWidgetState extends State<AnimatedSwapWidget> 
   with TickerProviderStateMixin {
 
-  final double address1Top = 20;
-  final double address2Top = 110;
+  final double widgetATop = 20;
+  final double widgetBTop = 110;
   bool swapped = false;
 
   late AnimationController controller;
@@ -47,7 +46,7 @@ class _MyWidgetState extends State<MyWidget>
 
     addressAnimation = Tween(
       begin: 0.0, 
-      end: address2Top - address1Top,
+      end: widgetBTop - widgetATop,
     )
     .animate(
       CurvedAnimation(
@@ -69,21 +68,20 @@ class _MyWidgetState extends State<MyWidget>
   Widget build(BuildContext context) {
     var tweenValue = addressAnimation.value;
 
-    return Container(
+    return SizedBox(
       width: 300,
       height: 150,
-      color: Colors.blue,
       child: Stack(
         children: <Widget> [
-          // Top address
+          //Widget A
           Positioned(
-            top: address1Top + tweenValue,
+            top: widgetATop + tweenValue,
             left: 20,
             child: const Text("This is the first address"),
           ),
-          // Bottom address
+          // Widget B
           Positioned(
-            top: address2Top - tweenValue,
+            top: widgetBTop - tweenValue,
             left: 20,
             child: const Text("This is another address"),
           ),
@@ -93,15 +91,10 @@ class _MyWidgetState extends State<MyWidget>
             right: 20,
             child: TextButton(
               onPressed: () => setState(() {
-                swapped ? 
-                  controller.reverse() : controller.forward();
-
+                swapped ? controller.reverse() : controller.forward();
                 swapped = !swapped;
               }),
-              child: const Text(
-                "swap", 
-                style: TextStyle(color: Colors.white),
-              ),
+              child: const Text("swap"),
             ),
           ),
         ],
