@@ -33,7 +33,6 @@ class _SwapWidgetState extends State<SwapWidget> {
     return SizedBox(
       width: 300,
       height: 150,
-//       color: Colors.blue,
       child: Stack(
         children: <Widget> [
           // Widget A
