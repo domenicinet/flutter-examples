@@ -77,13 +77,13 @@ class _AnimatedSwapWidgetState extends State<AnimatedSwapWidget>
           Positioned(
             top: widgetATop + tweenValue,
             left: 20,
-            child: const Text("This is the first address"),
+            child: const Text("This is widget A"),
           ),
           // Widget B
           Positioned(
             top: widgetBTop - tweenValue,
             left: 20,
-            child: const Text("This is another address"),
+            child: const Text("This is widget B"),
           ),
           // Swap button
           Positioned(
