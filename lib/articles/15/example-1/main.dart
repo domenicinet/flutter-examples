@@ -40,7 +40,7 @@ class _SwapWidgetState extends State<SwapWidget> {
           Positioned(
             top: swapped ? widgetBTop : widgetATop,
             left: 20,
-            child: const Text("This is the widget A"),
+            child: const Text("This is widget A"),
           ),
           // Widget B
           Positioned(
